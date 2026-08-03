@@ -250,7 +250,7 @@
 
 (unary_expression "!" @keyword.operator.unary.go)
 
-"." @keyword.operator.accessor.js
+"." @keyword.operator.accessor.go
 
 
 ; PUNCTUATION
