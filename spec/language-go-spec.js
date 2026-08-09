@@ -4,16 +4,16 @@ describe("Go settings", function () {
   afterEach(() => editor.destroy());
 
   beforeEach(function () {
-    atom.config.set("language.useTreeSitterParsers", false);
+    lumine.config.set("language.useTreeSitterParsers", false);
 
     waitsForPromise(() =>
-      atom.workspace.open().then(function (o) {
+      lumine.workspace.open().then(function (o) {
         editor = o;
         return (languageMode = editor.languageMode);
       }),
     );
 
-    waitsForPromise(() => atom.packages.activatePackage("language-go"));
+    waitsForPromise(() => lumine.packages.activatePackage("language-go"));
   });
 
   it("matches lines correctly using the increaseIndentPattern", function () {

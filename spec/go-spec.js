@@ -2,11 +2,11 @@ describe("Go grammar", function () {
   let grammar = null;
 
   beforeEach(function () {
-    atom.config.set("language.useTreeSitterParsers", false);
+    lumine.config.set("language.useTreeSitterParsers", false);
 
-    waitsForPromise(() => atom.packages.activatePackage("language-go"));
+    waitsForPromise(() => lumine.packages.activatePackage("language-go"));
 
-    runs(() => (grammar = atom.grammars.grammarForScopeName("source.go")));
+    runs(() => (grammar = lumine.grammars.grammarForScopeName("source.go")));
   });
 
   it("parses the grammar", function () {
