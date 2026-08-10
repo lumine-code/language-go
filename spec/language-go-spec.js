@@ -3,17 +3,13 @@ describe("Go settings", function () {
 
   afterEach(() => editor.destroy());
 
-  beforeEach(function () {
+  beforeEach(async () => {
     lumine.config.set("language.useTreeSitterParsers", false);
 
-    waitsForPromise(() =>
-      lumine.workspace.open().then(function (o) {
-        editor = o;
-        return (languageMode = editor.languageMode);
-      }),
-    );
+    editor = await lumine.workspace.open();
+    languageMode = editor.languageMode;
 
-    waitsForPromise(() => lumine.packages.activatePackage("language-go"));
+    await lumine.packages.activatePackage("language-go");
   });
 
   it("matches lines correctly using the increaseIndentPattern", function () {

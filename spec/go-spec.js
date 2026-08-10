@@ -1,12 +1,12 @@
 describe("Go grammar", function () {
   let grammar = null;
 
-  beforeEach(function () {
+  beforeEach(async () => {
     lumine.config.set("language.useTreeSitterParsers", false);
 
-    waitsForPromise(() => lumine.packages.activatePackage("language-go"));
+    await lumine.packages.activatePackage("language-go");
 
-    runs(() => (grammar = lumine.grammars.grammarForScopeName("source.go")));
+    grammar = lumine.grammars.grammarForScopeName("source.go");
   });
 
   it("parses the grammar", function () {
