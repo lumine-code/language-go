@@ -12,12 +12,12 @@ Go language support.
 
 ## Installation
 
-To install `language-go` search for _language-go_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/language-go`.
+To install `language-go` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/language-go`.
 
 ## Services
 
-- **hyperlink.injection** (`^1.0.0`): consumed to highlight URLs inside code and comments as clickable links.
-- **todo.injection** (`^1.0.0`): consumed to highlight `TODO`-style markers inside comments.
+- `hyperlink.injection`: consumed to highlight URLs inside code and comments as clickable links.
+- `todo.injection`: consumed to highlight `TODO`-style markers inside comments.
 
 ## Contributing
 
