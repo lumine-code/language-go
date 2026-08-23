@@ -9,7 +9,7 @@
   },
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-go#v0.25.0",
-    "wasmBuildTool": "tree-sitter-cli#v0.26.11",
+    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
     "grammar": "tree-sitter-go/tree-sitter-go.wasm",
     "highlightsQuery": "tree-sitter-go/highlights.scm",
     "foldsQuery": "tree-sitter-go/folds.scm",
