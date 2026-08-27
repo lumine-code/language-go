@@ -1,6 +1,6 @@
 {
   ".source.go": {
-    "language": {
+    "editor": {
       "commentStart": "// ",
       "commentDelimiters": {
         "block": ["/*", "*/"],
