@@ -261,16 +261,23 @@
 (":" @punctuation.separator.colon.go
   (#set! capture.shy))
 
-(parameter_list
-  "(" @punctuation.definition.parameters.begin.bracket.round.go
-  ")" @punctuation.definition.parameters.end.bracket.round.go
+(("(" @punctuation.definition.parameters.begin.bracket.round.go)
+  (#is? test.typeAt "parent parameter_list")
   (#set! capture.final true))
 
-(composite_literal
-  body: (literal_value
-    "{" @punctuation.definition.struct.begin.bracket.curly.go
-    "}" @punctuation.definition.struct.end.bracket.curly.go
-    (#set! capture.final true)))
+((")" @punctuation.definition.parameters.end.bracket.round.go)
+  (#is? test.typeAt "parent parameter_list")
+  (#set! capture.final true))
+
+(("{" @punctuation.definition.struct.begin.bracket.curly.go)
+  (#is? test.typeAt "parent literal_value")
+  (#is? test.typeAt "parent.parent composite_literal")
+  (#set! capture.final true))
+
+(("}" @punctuation.definition.struct.end.bracket.curly.go)
+  (#is? test.typeAt "parent literal_value")
+  (#is? test.typeAt "parent.parent composite_literal")
+  (#set! capture.final true))
 
 "{" @punctuation.definition.begin.bracket.curly.go
 "}" @punctuation.definition.end.bracket.curly.go
