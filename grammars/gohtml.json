@@ -1,13 +1,19 @@
 {
-  "scopeName": "text.html.gohtml",
   "name": "HTML (Go)",
-  "fileTypes": ["gohtml"],
-  "patterns": [
-    {
-      "include": "text.html.basic"
-    },
-    {
-      "include": "source.gotemplate"
-    }
-  ]
+  "scopeName": "text.html.gohtml",
+  "type": "tree-sitter",
+  "parser": "tree-sitter-go-template",
+  "fileTypes": ["gohtml", "gohtmltmpl"],
+  "comments": {
+    "block": ["{{/*", "*/}}"]
+  },
+  "treeSitter": {
+    "parserSource": "github:ngalaiko/tree-sitter-go-template#aa71f63de226c5592dfbfc1f29949522d7c95fac",
+    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
+    "grammar": "go-template.wasm",
+    "highlightsQuery": "go-template-highlights.scm",
+    "localsQuery": "go-template-locals.scm",
+    "foldsQuery": "go-template-folds.scm",
+    "indentsQuery": "go-template-indents.scm"
+  }
 }

@@ -4,8 +4,8 @@ Go language support.
 
 ## Features
 
-- **Grammars**: provides Tree-sitter grammars built from [tree-sitter-go](https://github.com/tree-sitter/tree-sitter-go) and TextMate grammars derived from [atom/language-go](https://github.com/atom/language-go).
-- **Syntax highlighting**: full grammar coverage for Go files.
+- **Grammars**: provides Tree-sitter grammars for Go, modules, checksums, and templates.
+- **Syntax highlighting**: covers Go source, `go.mod`, `go.sum`, text templates, and HTML templates.
 - **Snippets**: shortcuts for common declarations and control structures.
 - **Code folding**: collapse blocks, functions, and comments.
 - **Comment toggling**: line and block comment support.

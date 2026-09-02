@@ -1,17 +1,14 @@
 {
-  "scopeName": "source.sum",
   "name": "Go Checksum File",
-  "fileTypes": ["sum"],
-  "patterns": [
-    {
-      "comment": "Version string",
-      "match": "v(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:\\-(\\d{4}(?:0[1-9]|1[0-2])(?:0[1-9]|[1-2]\\d|3[0-1])(?:[0-1]\\d|2[0-3])(?:[0-5]\\d)(?:[0-5]\\d)))?(?:\\-([a-zA-Z\\d]{12}))?(?:\\+(incompatible))?(\\/go\\.mod)?",
-      "name": "string.unquoted.version.gosum"
-    },
-    {
-      "comment": "Checksum",
-      "match": "h1:[a-zA-Z\\d+\\/]{43}=",
-      "name": "string.unquoted.checksum.gosum"
-    }
-  ]
+  "scopeName": "source.sum",
+  "type": "tree-sitter",
+  "parser": "tree-sitter-gosum",
+  "injectionNames": ["gosum"],
+  "fileTypes": ["go.sum"],
+  "treeSitter": {
+    "parserSource": "github:tree-sitter-grammars/tree-sitter-go-sum#27816eb6b7315746ae9fcf711e4e1396dc1cf237",
+    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
+    "grammar": "gosum.wasm",
+    "highlightsQuery": "gosum-highlights.scm"
+  }
 }
