@@ -9,7 +9,7 @@
   },
   "treeSitter": {
     "parserSource": "github:ngalaiko/tree-sitter-go-template#aa71f63de226c5592dfbfc1f29949522d7c95fac",
-    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
+    "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "go-template.wasm",
     "highlightsQuery": "go-template-highlights.scm",
     "localsQuery": "go-template-locals.scm",

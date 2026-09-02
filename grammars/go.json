@@ -10,7 +10,7 @@
   },
   "treeSitter": {
     "parserSource": "github:tree-sitter/tree-sitter-go#v0.25.0",
-    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
+    "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "go.wasm",
     "highlightsQuery": "go-highlights.scm",
     "foldsQuery": "go-folds.scm",

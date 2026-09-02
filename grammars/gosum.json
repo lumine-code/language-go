@@ -7,7 +7,7 @@
   "fileTypes": ["go.sum"],
   "treeSitter": {
     "parserSource": "github:tree-sitter-grammars/tree-sitter-go-sum#27816eb6b7315746ae9fcf711e4e1396dc1cf237",
-    "wasmBuildTool": "tree-sitter-cli#v0.26.13",
+    "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "gosum.wasm",
     "highlightsQuery": "gosum-highlights.scm"
   }
