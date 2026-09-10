@@ -8,6 +8,7 @@
 
 ((comment) @comment.line.double-slash.go
   (#match? @comment.line.double-slash.go "^\/\/")
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$")
   (#set! capture.final true))
 
 ((comment) @punctuation.definition.comment.go
@@ -125,12 +126,12 @@
 ; =======
 
 ((interpreted_string_literal "\"") @string.quoted.double.go)
-(interpreted_string_literal
-  "\"" @punctuation.definition.string.begin.go
+("\"" @punctuation.definition.string.begin.go
+  (#is? test.childOfType interpreted_string_literal)
   (#is? test.first true))
 
-(interpreted_string_literal
-  "\"" @punctuation.definition.string.end.go
+("\"" @punctuation.definition.string.end.go
+  (#is? test.childOfType interpreted_string_literal)
   (#is? test.last true))
 
 (escape_sequence) @constant.character.escape.go

@@ -1,4 +1,8 @@
+const { Point } = require("lumine");
+const fs = require("fs");
 const path = require("path");
+
+const highlightsPath = path.join(__dirname, "..", "grammars", "go-highlights.scm");
 
 describe("WASM Tree-sitter Go grammar", () => {
   beforeEach(async () => {
@@ -60,8 +64,12 @@ describe("WASM Tree-sitter Go grammar", () => {
   });
 
   it("keeps parameter and composite-literal delimiters leaf-rooted", async () => {
+    const querySource = fs.readFileSync(highlightsPath, "utf8");
+    expect(querySource).not.toMatch(/\((?:composite_literal|parameter_list)\s*\n\s*(?:body:|")/);
+    expect(querySource).toContain('(#is? test.typeAt "parent parameter_list")');
+
     const editor = await lumine.workspace.open();
-    const text = "package p\nfunc f(value int) { _ = []int{1, 2} }";
+    const text = 'package p\nvar empty = ""\nfunc f(value int) { _ = []int{1, 2} }';
     editor.setGrammar(lumine.grammars.grammarForScopeName("source.go"));
     editor.setText(text);
     await editor.languageMode.ready;
@@ -83,5 +91,55 @@ describe("WASM Tree-sitter Go grammar", () => {
     expect(scopesAt(text.indexOf("2}") + 1)).toContain(
       "punctuation.definition.struct.end.bracket.curly.go",
     );
+    const emptyString = text.indexOf('""');
+    expect(scopesAt(emptyString)).toContain("punctuation.definition.string.begin.go");
+    expect(scopesAt(emptyString)).not.toContain("punctuation.definition.string.end.go");
+    expect(scopesAt(emptyString + 1)).toContain("punctuation.definition.string.end.go");
+    expect(scopesAt(emptyString + 1)).not.toContain("punctuation.definition.string.begin.go");
+  });
+
+  it("keeps leaf-rooted captures viewport-local and bounded", async () => {
+    const editor = await lumine.workspace.open("capture-budget.go");
+    editor.setText(
+      "package p\r\n" +
+        Array.from(
+          { length: 1000 },
+          (_, index) => `var x${index} = T{A: "value"} // generated`,
+        ).join("\r\n"),
+    );
+    await editor.languageMode.ready;
+    const layer = editor.languageMode.rootLanguageLayer;
+    const captures = layer.queries.highlightsQuery.captures(layer.tree.rootNode);
+    const tileCaptures = layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+      startPosition: new Point(400, 0),
+      endPosition: new Point(406, 0),
+    });
+
+    expect(captures.length).toBeLessThanOrEqual(19000);
+    expect(tileCaptures.length).toBeLessThanOrEqual(115);
+
+    const multiline = ["package p", "var x = T{", ...Array(6000).fill("  A: 1,"), "}"].join("\r\n");
+    editor.setText(multiline);
+    await editor.languageMode.atTransactionEnd();
+    const closingRow = editor.getLastBufferRow();
+    const closingCaptures = layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+      startPosition: new Point(closingRow, 0),
+      endPosition: new Point(closingRow, 1),
+    });
+    expect(
+      closingCaptures.some(
+        ({ name, node }) =>
+          name === "punctuation.definition.struct.end.bracket.curly.go" &&
+          node.startPosition.row === closingRow,
+      ),
+    ).toBe(true);
+
+    const options = {
+      startPosition: new Point(3000, 0),
+      endPosition: new Point(3006, 0),
+    };
+    expect(
+      layer.queries.highlightsQuery.captures(layer.tree.rootNode, options).length,
+    ).toBeLessThanOrEqual(100);
   });
 });

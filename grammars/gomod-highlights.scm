@@ -13,7 +13,8 @@
 
 "=>" @keyword.operator.go-mod
 
-(comment) @comment.line.double-slash.go-mod
+((comment) @comment.line.double-slash.go-mod
+  (#set! adjust.endBeforeFirstMatchOf "\\r?$"))
 ((comment) @punctuation.definition.comment.go-mod
   (#set! adjust.startAndEndAroundFirstMatchOf "^//"))
 
