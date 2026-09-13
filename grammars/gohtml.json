@@ -3,6 +3,7 @@
   "scopeName": "text.html.gohtml",
   "type": "tree-sitter",
   "parser": "tree-sitter-go-template",
+  "injectionNames": ["gohtml", "gohtmltmpl"],
   "fileTypes": ["gohtml", "gohtmltmpl"],
   "comments": {
     "block": ["{{/*", "*/}}"]

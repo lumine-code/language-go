@@ -3,7 +3,7 @@
   "scopeName": "source.mod",
   "type": "tree-sitter",
   "parser": "tree-sitter-gomod",
-  "injectionNames": ["gomod"],
+  "injectionNames": ["gomod", "go.mod"],
   "fileTypes": ["go.mod"],
   "comments": {
     "start": "// ",

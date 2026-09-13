@@ -63,6 +63,18 @@ describe("WASM Tree-sitter Go grammar", () => {
     );
   });
 
+  it("routes file-oriented injection aliases to their exact grammars", () => {
+    for (const [alias, scopeName] of [
+      ["go.mod", "source.mod"],
+      ["go.sum", "source.sum"],
+      ["go.work.sum", "source.sum"],
+      ["gohtml", "text.html.gohtml"],
+      ["gohtmltmpl", "text.html.gohtml"],
+    ]) {
+      expect(lumine.grammars.treeSitterGrammarForLanguageString(alias)?.scopeName).toBe(scopeName);
+    }
+  });
+
   it("keeps parameter and composite-literal delimiters leaf-rooted", async () => {
     const querySource = fs.readFileSync(highlightsPath, "utf8");
     expect(querySource).not.toMatch(/\((?:composite_literal|parameter_list)\s*\n\s*(?:body:|")/);
