@@ -26,6 +26,11 @@ describe("WASM Tree-sitter Go grammar", () => {
     return editor.scopeDescriptorForBufferPosition(position).getScopesArray();
   }
 
+  async function highlightCaptures(editor, options) {
+    const groups = await editor.getGrammarQueryCaptureGroups("highlightsQuery", options);
+    return groups.find(({ grammar }) => grammar === editor.getGrammar())?.captures ?? [];
+  }
+
   it("selects and highlights go.mod files", async () => {
     const editor = await openFixture("sample.go.mod");
 
@@ -120,9 +125,8 @@ describe("WASM Tree-sitter Go grammar", () => {
         ).join("\r\n"),
     );
     await editor.languageMode.ready;
-    const layer = editor.languageMode.rootLanguageLayer;
-    const captures = layer.queries.highlightsQuery.captures(layer.tree.rootNode);
-    const tileCaptures = layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+    const captures = await highlightCaptures(editor);
+    const tileCaptures = await highlightCaptures(editor, {
       startPosition: new Point(400, 0),
       endPosition: new Point(406, 0),
     });
@@ -134,7 +138,7 @@ describe("WASM Tree-sitter Go grammar", () => {
     editor.setText(multiline);
     await editor.languageMode.atTransactionEnd();
     const closingRow = editor.getLastBufferRow();
-    const closingCaptures = layer.queries.highlightsQuery.captures(layer.tree.rootNode, {
+    const closingCaptures = await highlightCaptures(editor, {
       startPosition: new Point(closingRow, 0),
       endPosition: new Point(closingRow, 1),
     });
@@ -150,8 +154,6 @@ describe("WASM Tree-sitter Go grammar", () => {
       startPosition: new Point(3000, 0),
       endPosition: new Point(3006, 0),
     };
-    expect(
-      layer.queries.highlightsQuery.captures(layer.tree.rootNode, options).length,
-    ).toBeLessThanOrEqual(100);
+    expect((await highlightCaptures(editor, options)).length).toBeLessThanOrEqual(100);
   });
 });
