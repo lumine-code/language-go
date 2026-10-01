@@ -15,6 +15,7 @@
     "highlightsQuery": "go-template-highlights.scm",
     "localsQuery": "go-template-locals.scm",
     "foldsQuery": "go-template-folds.scm",
-    "indentsQuery": "go-template-indents.scm"
+    "indentsQuery": "go-template-indents.scm",
+    "injectionsQuery": "gohtml-injections.scm"
   }
 }

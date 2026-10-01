@@ -2,6 +2,11 @@ const { Point } = require("lumine");
 const fs = require("fs");
 const path = require("path");
 
+const packagePath = (name) => {
+  const sibling = path.resolve(__dirname, "..", "..", name);
+  return fs.existsSync(sibling) ? sibling : name;
+};
+
 const highlightsPath = path.join(__dirname, "..", "grammars", "go-highlights.scm");
 
 describe("WASM Tree-sitter Go grammar", () => {
@@ -27,8 +32,9 @@ describe("WASM Tree-sitter Go grammar", () => {
   }
 
   async function highlightCaptures(editor, options) {
-    const groups = await editor.getGrammarQueryCaptureGroups("highlightsQuery", options);
-    return groups.find(({ grammar }) => grammar === editor.getGrammar())?.captures ?? [];
+    const query = await editor.getGrammar().getQuery("highlightsQuery");
+    const root = editor.getBuffer().getLanguageMode().rootLanguageLayer.tree.rootNode;
+    return query.captures(root, options);
   }
 
   it("selects and highlights go.mod files", async () => {
@@ -66,6 +72,25 @@ describe("WASM Tree-sitter Go grammar", () => {
     expect(scopesAt(editor, "<h1>", 1).some((scope) => scope.startsWith("entity.name.tag"))).toBe(
       true,
     );
+  });
+
+  it("keeps nested template text in one HTML document across attribute fragments", async () => {
+    await lumine.packages.activatePackage(packagePath("language-html"));
+    const editor = await lumine.workspace.open();
+    try {
+      editor.setGrammar(lumine.grammars.grammarForScopeName("text.html.gohtml"));
+      editor.setText('<div {{if .X}}class="{{.Class}}"{{end}}>Hi</div>');
+      await editor.languageMode.ready;
+      await editor.languageMode.atGrammarSettlement();
+      const layers = editor.languageMode
+        .getAllInjectionLayers()
+        .filter((layer) => layer.grammar.scopeName === "text.html.basic");
+      expect(layers.length).toBe(1);
+      expect(layers[0].tree.rootNode.hasError).toBe(false);
+      expect(layers[0].tree.rootNode.descendantsOfType("attribute").length).toBe(1);
+    } finally {
+      editor.destroy();
+    }
   });
 
   it("routes file-oriented injection aliases to their exact grammars", () => {
