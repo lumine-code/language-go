@@ -1,18 +1,13 @@
-; The template's text fragments form one HTML document across control flow.
-([(text) (yaml_no_injection_text)] @injection.owner @injection.content
-  (#set! injection.language "html")
-  (#set! injection.combined)
-  (#set! injection.newlines-between))
-
 ((comment) @injection.owner @injection.content
   (#set! injection.language "hyperlink")
   (#set! injection.language-scope "none")
   (#set! injection.include-children))
 
-([
-  (interpreted_string_literal)
-  (raw_string_literal)
-] @injection.owner @injection.content
+((interpreted_string_literal (interpreted_string_literal_content) @injection.owner @injection.content)
+  (#set! injection.language "hyperlink")
+  (#set! injection.language-scope "none"))
+
+((raw_string_literal (raw_string_literal_content) @injection.owner @injection.content)
   (#set! injection.language "hyperlink")
   (#set! injection.language-scope "none"))
 ((comment) @injection.owner @injection.content

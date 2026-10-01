@@ -13,6 +13,7 @@
     "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "go.wasm",
     "highlightsQuery": "go-highlights.scm",
+    "injectionsQuery": "go-injections.scm",
     "foldsQuery": "go-folds.scm",
     "indentsQuery": "go-indents.scm"
   }

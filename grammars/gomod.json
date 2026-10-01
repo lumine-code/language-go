@@ -14,6 +14,7 @@
     "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "gomod.wasm",
     "highlightsQuery": "gomod-highlights.scm",
+    "injectionsQuery": "gomod-injections.scm",
     "foldsQuery": "gomod-folds.scm",
     "indentsQuery": "gomod-indents.scm"
   }
