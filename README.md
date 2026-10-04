@@ -5,6 +5,7 @@ Go language support.
 ## Features
 
 - **Grammars**: provides Tree-sitter grammars for Go, modules, checksums, and templates.
+- **Symbols**: declarations, fields, module dependencies and named templates.
 - **Syntax highlighting**: covers Go source, `go.mod`, `go.sum`, text templates, and HTML templates.
 - **Snippets**: shortcuts for common declarations and control structures.
 - **Code folding**: collapse blocks, functions, and comments.

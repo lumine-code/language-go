@@ -1,0 +1,95 @@
+{
+  "source.go": {
+    "text": "package demo\ntype Widget struct { Value int }\ntype Speaker interface { Speak() string }\ntype Alias = int\nconst Limit = 3\nvar Count = 1\nfunc Greet(name string) string { return name }\nfunc (w Widget) Speak() string { return Greet(\"x\") }\n// func Phantom() {}\n",
+    "symbols": [
+      {
+        "name": "demo",
+        "tag": "module"
+      },
+      {
+        "name": "Widget",
+        "tag": "struct"
+      },
+      {
+        "name": "Value",
+        "tag": "field"
+      },
+      {
+        "name": "Speaker",
+        "tag": "interface"
+      },
+      {
+        "name": "Speak",
+        "tag": "method"
+      },
+      {
+        "name": "Alias",
+        "tag": "type"
+      },
+      {
+        "name": "Limit",
+        "tag": "constant"
+      },
+      {
+        "name": "Count",
+        "tag": "variable"
+      },
+      {
+        "name": "Greet",
+        "tag": "function"
+      }
+    ],
+    "absent": ["Phantom"]
+  },
+  "source.gotemplate": {
+    "text": "{{define \"greet\"}}Hello{{end}}\n{{block \"body\" .}}Body{{end}}\n{{template \"greet\" .}}\n",
+    "symbols": [
+      {
+        "name": "greet",
+        "tag": "function",
+        "captureText": "\"greet\""
+      },
+      {
+        "name": "body",
+        "tag": "function",
+        "captureText": "\"body\""
+      }
+    ],
+    "absent": ["Phantom"]
+  },
+  "text.html.gohtml": {
+    "text": "<main>{{define \"greet\"}}Hello{{end}}\n{{block \"body\" .}}Body{{end}}</main>\n",
+    "symbols": [
+      {
+        "name": "greet",
+        "tag": "function",
+        "captureText": "\"greet\""
+      },
+      {
+        "name": "body",
+        "tag": "function",
+        "captureText": "\"body\""
+      }
+    ],
+    "absent": ["Phantom"]
+  },
+  "source.mod": {
+    "text": "module example.com/demo\n\ngo 1.24\n\nrequire example.com/dependency v1.2.3\n",
+    "symbols": [
+      {
+        "name": "example.com/demo",
+        "tag": "module"
+      },
+      {
+        "name": "example.com/dependency",
+        "tag": "module"
+      }
+    ],
+    "absent": ["Phantom"]
+  },
+  "source.sum": {
+    "text": "example.com/demo v1.2.3 h1:abcdefghi=\n",
+    "symbols": [],
+    "noSymbols": true
+  }
+}

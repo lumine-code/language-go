@@ -12,6 +12,7 @@
     "parserSource": "github:tree-sitter/tree-sitter-go#v0.25.0",
     "wasmBuildTool": "tree-sitter-cli#v0.27.0",
     "grammar": "go.wasm",
+    "tagsQuery": "go-tags.scm",
     "highlightsQuery": "go-highlights.scm",
     "injectionsQuery": "go-injections.scm",
     "foldsQuery": "go-folds.scm",
