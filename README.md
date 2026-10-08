@@ -2,6 +2,8 @@
 
 Go language support.
 
+Fork of [pulsar-edit/pulsar](https://github.com/pulsar-edit/pulsar) (`packages/language-go`).
+
 ## Features
 
 - **Grammars**: provides Tree-sitter grammars for Go, modules, checksums, and templates.
