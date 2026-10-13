@@ -1,0 +1,16 @@
+{
+  "title": "language-go",
+  "description": "Go syntax highlighting in the editor.",
+  "recordedOn": "2026-10-13",
+  "sourceRevision": "427acc499975d6cb90e9849eab4ae8761f5a804b",
+  "mode": "normal",
+  "fontSettings": "default",
+  "images": [
+    {
+      "file": "demo.png",
+      "label": "Go syntax highlighting at the default editor font size.",
+      "width": 1100,
+      "height": 780
+    }
+  ]
+}

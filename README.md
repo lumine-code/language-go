@@ -13,6 +13,8 @@ Fork of [pulsar-edit/pulsar](https://github.com/pulsar-edit/pulsar) (`packages/l
 - **Code folding**: collapse blocks, functions, and comments.
 - **Comment toggling**: line and block comment support.
 
+![Go syntax highlighting at the default editor font size.](.github/demo.png)
+
 ## Installation
 
 To install `language-go` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/language-go`.
