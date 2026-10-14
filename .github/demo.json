@@ -1,16 +1,61 @@
 {
   "title": "language-go",
-  "description": "Go syntax highlighting in the editor.",
-  "recordedOn": "2026-10-13",
-  "sourceRevision": "427acc499975d6cb90e9849eab4ae8761f5a804b",
+  "description": "Go syntax highlighting at the default editor font size.",
+  "recordedOn": "2026-10-14",
+  "sourceRevision": "a1dd86a3d5611a2cf6b7c23b3355dabb031dd70e",
+  "themeSourceRevision": "14a69683b0e3238e2bc128fbfae3866c1e4ee9c6",
   "mode": "normal",
   "fontSettings": "default",
+  "scenario": "demo.js",
+  "recipeHash": "ee46eaa7d5900b0a8763f5153cdbd60e2e84f0f4a23283371dc7b8a59c94da76",
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "electron": "44.7.0",
+    "chrome": "152.0.7977.130",
+    "devicePixelRatio": 1,
+    "locale": "en-GB",
+    "fontFamily": "Fira Code, Menlo, DejaVu Sans Mono, Consolas, monospace",
+    "fontSize": 14,
+    "themes": ["one-day-syntax", "one-day-ui"]
+  },
+  "viewport": { "width": 1100, "height": 780 },
+  "cornerRadius": 10,
+  "sources": {
+    "editor": {
+      "revision": "c4d7a05fe6960ae6fb041981d6cf13e9c0286b17",
+      "dirty": true,
+      "workingTreeHash": "af0ec098e764416df9522f3c6e555050b520e4700da382b2b983b2ff3742bd0a"
+    },
+    "package": {
+      "revision": "a1dd86a3d5611a2cf6b7c23b3355dabb031dd70e",
+      "dirty": true,
+      "workingTreeHash": "042a5efa5f7eb531cc97e52768c6d6554bf0c3ffac64d7fb1f223613c846424c"
+    },
+    "language-go": {
+      "revision": "a1dd86a3d5611a2cf6b7c23b3355dabb031dd70e",
+      "dirty": true,
+      "workingTreeHash": "042a5efa5f7eb531cc97e52768c6d6554bf0c3ffac64d7fb1f223613c846424c"
+    },
+    "one-theme": {
+      "revision": "14a69683b0e3238e2bc128fbfae3866c1e4ee9c6",
+      "dirty": true,
+      "workingTreeHash": "25d6ed50595d6b10f7d53e41dbbe8f92dcb5c0e911871356f3e6138e5c76df57"
+    }
+  },
+  "fixtures": [
+    {
+      "file": "example.go",
+      "sha256": "1f4305696fc5fe46f5c4c0c4e7d1f2c7fa3f40f4e4d07993241e0f4deb2da073"
+    }
+  ],
   "images": [
     {
       "file": "demo.png",
       "label": "Go syntax highlighting at the default editor font size.",
       "width": 1100,
-      "height": 780
+      "height": 780,
+      "sha256": "dc5f8e8de0ec7be46065a8fc6ee64d0e7bfea23452dca4b9dfb78f484a171cbe"
     }
   ]
 }
