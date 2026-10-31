@@ -7,5 +7,29 @@
         "line": "//"
       }
     }
+  },
+  ".source.mod": {
+    "editor": {
+      "commentStart": "// ",
+      "commentDelimiters": {
+        "line": "//"
+      }
+    }
+  },
+  ".source.gotemplate": {
+    "editor": {
+      "commentStart": "{{/*",
+      "commentEnd": "*/}}",
+      "commentDelimiters": {
+        "block": ["{{/*", "*/}}"]
+      }
+    }
+  },
+  ".source.sum": {
+    "editor": {
+      "commentStart": "",
+      "commentEnd": "",
+      "commentDelimiters": {}
+    }
   }
 }
