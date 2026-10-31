@@ -99,4 +99,57 @@ describe("go conservative indentation", () => {
       expect(editor.getText()).toBe(source);
     }
   });
+
+  it("aligns a standalone template branch only when its complete tag is typed", async () => {
+    for (const tag of ["{{ end }}", "{{ else }}", "{{- end -}}", "{{- else -}}"]) {
+      await start("typed.gotmpl", "{{ if .Ready }}\n  body\n  ");
+      editor.setCursorBufferPosition([2, Infinity]);
+      for (const character of tag) {
+        await editor.insertText(character, { autoIndent: true, autoDecreaseIndent: true });
+        await editor.whenGrammarSettled();
+        if (editor.lineTextForBufferRow(2).trim() !== tag) {
+          expect(editor.lineTextForBufferRow(2).startsWith("  ")).toBe(true);
+        }
+      }
+      expect(editor.lineTextForBufferRow(2)).toBe(tag);
+    }
+  });
+
+  it("matches the nested template owner and preserves inline output when typing", async () => {
+    for (const [source, tag, expected] of [
+      ["{{ if .Outer }}\n  {{ range .Items }}\n    body\n    ", "{{ end }}", "  {{ end }}"],
+      ["{{ if .Ready }}\n  body\n  output ", "{{ end }}", "  output {{ end }}"],
+      ["{{ if .Ready }}\n  body\n  output ", "{{ else }}", "  output {{ else }}"],
+    ]) {
+      await start("inline.gotmpl", source);
+      const row = editor.getLastBufferRow();
+      editor.setCursorBufferPosition([row, Infinity]);
+      for (const character of tag) {
+        await editor.insertText(character, { autoIndent: true, autoDecreaseIndent: true });
+        await editor.whenGrammarSettled();
+      }
+      expect(editor.lineTextForBufferRow(row)).toBe(expected);
+    }
+  });
+
+  it("keeps a manual correction when text is typed after a completed template tag", async () => {
+    await start("manual.gotmpl", "{{ if .Ready }}\n  body\n    {{ end }}");
+    editor.setCursorBufferPosition([2, Infinity]);
+    for (const character of " output") {
+      await editor.insertText(character, { autoIndent: true, autoDecreaseIndent: true });
+      await editor.whenGrammarSettled();
+    }
+    expect(editor.lineTextForBufferRow(2)).toBe("    {{ end }} output");
+  });
+
+  it("bounds the preceding template text inspected when a standalone end tag is typed", async () => {
+    await start("long.gotmpl", "{{ if .Ready }}\n" + "  body\n".repeat(12000) + "  ");
+    const row = editor.getLastBufferRow();
+    editor.setCursorBufferPosition([row, Infinity]);
+    for (const character of "{{ end }}") {
+      await editor.insertText(character, { autoIndent: true, autoDecreaseIndent: true });
+      await editor.whenGrammarSettled();
+    }
+    expect(editor.lineTextForBufferRow(row)).toBe("{{ end }}");
+  });
 });
