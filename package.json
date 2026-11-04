@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "files": [
     "grammars",
+    "lib",
     "settings",
     "snippets",
     "spec",
@@ -32,7 +33,8 @@
     "format:check": "prettier --check ."
   },
   "specPackages": [
-    "language-source"
+    "language-source",
+    "language-html"
   ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -2,7 +2,8 @@
 ([(text) (yaml_no_injection_text)] @injection.owner @injection.content
   (#set! injection.language "html")
   (#set! injection.combined)
-  (#set! injection.newlines-between))
+  (#set! injection.newlines-between)
+  (#set! injection.content-edit-policy "content-words"))
 
 ((comment) @injection.owner @injection.content
   (#set! injection.language "hyperlink")

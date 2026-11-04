@@ -17,6 +17,9 @@
     "localsQuery": "go-template-locals.scm",
     "foldsQuery": "go-template-folds.scm",
     "indentsQuery": "go-template-indents.scm",
-    "injectionsQuery": "gohtml-injections.scm"
+    "injectionsQuery": "gohtml-injections.scm",
+    "contentEditPolicies": {
+      "content-words": "../lib/content-edit-policy.js"
+    }
   }
 }
